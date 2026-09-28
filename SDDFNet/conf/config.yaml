@@ -1,0 +1,25 @@
+defaults:
+  - _self_
+  - network: resnest50_baseline
+  - data: supervised_data
+  - trainer: supervised_trainer
+
+seed: 42
+mode: train
+ckpt_path: null
+test_after_fit: true
+predict_after_fit: false
+data_root: ./data/xBD
+ebd_root: ./data/EBD
+model_dir: ./outputs
+log_dir: ./logs
+name: baseline_seed${seed}
+logger:
+  _target_: lightning.pytorch.loggers.CSVLogger
+  save_dir: ${log_dir}
+  name: ${name}
+hydra:
+  job:
+    chdir: false
+  run:
+    dir: ${log_dir}/hydra/${now:%Y-%m-%d}/${now:%H-%M-%S}

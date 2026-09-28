@@ -1,0 +1,21 @@
+_target_: lightning.pytorch.trainer.Trainer
+accelerator: gpu
+devices: 1
+strategy: auto
+max_epochs: 60
+precision: 16-mixed
+deterministic: true
+sync_batchnorm: false
+gradient_clip_val: 0.5
+gradient_clip_algorithm: norm
+callbacks:
+- _target_: lightning.pytorch.callbacks.ModelCheckpoint
+  monitor: val_xbd_score
+  mode: max
+  save_top_k: 1
+  save_last: true
+  dirpath: ${model_dir}/checkpoints/${name}
+  filename: ${name}-{epoch:02d}-{val_xbd_score:.4f}
+default_root_dir: ${log_dir}
+fast_dev_run: false
+overfit_batches: 0.0

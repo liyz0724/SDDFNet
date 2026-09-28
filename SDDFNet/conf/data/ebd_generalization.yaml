@@ -1,0 +1,5 @@
+_target_: datasets.ebd_generalization_dataset.EBDGeneralizationDataModule
+test_dirs:
+  - ${ebd_root}
+labeled_batch_size: 1
+num_workers: 4
